@@ -1,0 +1,10 @@
+@extends('template.main')
+@section('content')
+    @include('partials.service.headerSection')
+    @include('partials.service.servicesSection')
+    @include('partials.service.featuresSection')
+    @include('partials.service.servicescardSection')
+    @include('partials.service.newsletterSection')
+    @include('partials.welcome.contactSection')
+    @include('partials.welcome.footerSection')
+@endsection
