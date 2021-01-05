@@ -265,6 +265,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        ['header' => 'website_settings'],
         [
             'text'    => 'header',
             'icon'    => 'fas fa-fw fa-share',

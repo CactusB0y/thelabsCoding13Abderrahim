@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
 use App\Models\Navbar;
+use App\Models\Logo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,25 +20,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $navbars = Navbar::all();
-    return view('welcome',compact('navbars'));
+    $logos = Logo::all();
+    return view('welcome',compact('navbars','logos'));
 });
 
 Route::get('/service', function () {
     $navbars = Navbar::all();
-    return view('service',compact('navbars'));
+    $logos = Logo::all();
+    return view('service',compact('navbars','logos'));
 });
 
 Route::get('/blog', function () {
     $navbars = Navbar::all();
-    return view('blog',compact('navbars'));
+    $logos = Logo::all();
+    return view('blog',compact('navbars','logos'));
 });
 
 Route::get('/contact', function () {
     $navbars = Navbar::all();
-    return view('contact',compact('navbars'));
+    $logos = Logo::all();
+    return view('contact',compact('navbars','logos'));
 });
 
 Route::resource('navbar', NavbarController::class);
+Route::resource('logo', LogoController::class);
 
 Auth::routes();
 

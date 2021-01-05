@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logo;
 use App\Models\Navbar;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class NavbarController extends Controller
     public function index()
     {
         $navbars = Navbar::all();
-        return view('backoffice.header',compact('navbars'));
+        $logo = Logo::first();
+        return view('backoffice.header',compact('navbars','logo'));
     }
 
     /**

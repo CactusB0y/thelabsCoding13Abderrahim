@@ -41,7 +41,9 @@
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="logo">
-			<img src="{{asset('img/logo.png')}}" alt=""><!-- Logo -->
+			@foreach ($logos as $logo)
+				<img src="{{asset('img/'.$logo->src_intervention)}}" alt=""><!-- Logo -->	
+			@endforeach
 		</div>
 		<!-- Navigation -->
 		<div class="responsive"><i class="fa fa-bars"></i></div>
