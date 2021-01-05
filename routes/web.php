@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\NavbarController;
+use App\Models\Navbar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,24 +17,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $navbars = Navbar::all();
+    return view('welcome',compact('navbars'));
 });
 
 Route::get('/service', function () {
-    return view('service');
+    $navbars = Navbar::all();
+    return view('service',compact('navbars'));
 });
 
 Route::get('/blog', function () {
-    return view('blog');
+    $navbars = Navbar::all();
+    return view('blog',compact('navbars'));
 });
 
 Route::get('/contact', function () {
-    return view('contact');
+    $navbars = Navbar::all();
+    return view('contact',compact('navbars'));
 });
+
+Route::resource('navbar', NavbarController::class);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 

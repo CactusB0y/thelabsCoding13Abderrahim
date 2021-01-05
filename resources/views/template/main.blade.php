@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}"/>
 	<link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}"/>
 	<link rel="stylesheet" href="{{asset('css/style.css')}}"/>
+	
 
 
 	<!--[if lt IE 9]>
@@ -46,13 +47,16 @@
 		<div class="responsive"><i class="fa fa-bars"></i></div>
 		<nav>
 			<ul class="menu-list">
-				<li class="active"><a href="/">Home</a></li>
-				<li><a href="/service">Services</a></li>
+				@foreach ($navbars as $navbar)
+					<li><a href="{{$navbar->url}}">{{$navbar->button}}</a></li>
+				@endforeach
+				{{-- <li class="active"><a href="/">Home</a></li>
 				<li><a href="/blog">Blog</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/contact">Contact</a></li> --}}
                 @if (Route::has('login'))
                     @auth
-                       <li><a href="{{ url('/home') }}">Home</a></li> 
+					   <li><a href="{{ url('/home') }}">Home</a></li>
+					   <li><a href="{{ url('/logout') }}" class="btn btn-light">Logout</a></li> 
                     @else
                         <li><a href="{{ route('login') }}">Login</a></li>
 
