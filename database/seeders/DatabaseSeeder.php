@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NavbarSeeder::class,
             UserSeeder::class,
-            LogoSeeder::class
+            LogoSeeder::class,
+            CarousselSeeder::class
         ]);
     }
 }

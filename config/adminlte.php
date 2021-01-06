@@ -267,7 +267,7 @@ return [
         ],
         ['header' => 'website_settings'],
         [
-            'text'    => 'header',
+            'text'    => 'Home',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [

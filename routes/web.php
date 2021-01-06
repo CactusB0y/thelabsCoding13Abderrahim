@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
+use App\Models\Caroussel;
 use App\Models\Navbar;
 use App\Models\Logo;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
-    return view('welcome',compact('navbars','logos'));
+    $caroussels = Caroussel::all();
+    return view('welcome',compact('navbars','logos','caroussels'));
 });
 
 Route::get('/service', function () {
@@ -44,6 +47,7 @@ Route::get('/contact', function () {
 
 Route::resource('navbar', NavbarController::class);
 Route::resource('logo', LogoController::class);
+Route::resource('caroussel', CarousselController::class);
 
 Auth::routes();
 

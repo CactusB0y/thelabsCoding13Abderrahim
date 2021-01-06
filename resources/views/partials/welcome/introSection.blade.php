@@ -10,8 +10,9 @@
     </div>
     <!-- slider -->
     <div id="hero-slider" class="owl-carousel">
-        <div class="item  hero-item" data-bg="{{asset('img/01.jpg')}}"></div>
-        <div class="item  hero-item" data-bg="{{asset('img/02.jpg')}}"></div>
+        $@foreach ($caroussels as $caroussel)
+            <div class="item  hero-item" data-bg="{{asset('img/'.$caroussel->src)}}"></div>  
+        @endforeach
     </div>
 </div>
 <!-- Intro Section -->

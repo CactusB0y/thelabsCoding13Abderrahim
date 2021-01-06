@@ -76,7 +76,7 @@ class LogoController extends Controller
         if($update->src == "big-logo.png" && $update->src_intervention == 'logo.png'){
             $update->src = 'newbig-logo.png';
             $update->src_intervention = 'newlogo.png';
-            Image::make($request->file('src'))->save('img/newbig-logo.png');
+            Image::make($request->file('src'))->resize(504,148)->save('img/newbig-logo.png');
             Image::make($request->file('src'))->resize(111,32)->save('img/newlogo.png');
             $update->save();
             return redirect()->back();
