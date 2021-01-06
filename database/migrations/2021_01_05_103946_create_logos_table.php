@@ -17,6 +17,7 @@ class CreateLogosTable extends Migration
             $table->id();
             $table->string('src');
             $table->string('src_intervention');
+            $table->string('titre');
             $table->timestamps();
         });
     }

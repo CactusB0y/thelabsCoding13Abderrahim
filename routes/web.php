@@ -46,6 +46,7 @@ Route::get('/contact', function () {
 });
 
 Route::resource('navbar', NavbarController::class);
+Route::post('/titlechange/{id}', [LogoController::class, 'titlechange']);
 Route::resource('logo', LogoController::class);
 Route::resource('caroussel', CarousselController::class);
 

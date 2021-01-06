@@ -4,13 +4,13 @@
         <div class="hero-center">
             @foreach ($logos as $logo)
                 <img src="{{asset('img/'.$logo->src)}}" alt="">   
+                <p>{{$logo->titre}}</p>
             @endforeach
-            <p>Get your freebie template now!</p>
         </div>
     </div>
     <!-- slider -->
     <div id="hero-slider" class="owl-carousel">
-        $@foreach ($caroussels as $caroussel)
+        @foreach ($caroussels as $caroussel)
             <div class="item  hero-item" data-bg="{{asset('img/'.$caroussel->src)}}"></div>  
         @endforeach
     </div>

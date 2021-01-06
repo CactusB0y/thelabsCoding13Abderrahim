@@ -74,6 +74,7 @@ class LogoController extends Controller
         $update = Logo::find($id);
         
         if($update->src == "big-logo.png" && $update->src_intervention == 'logo.png'){
+            $update->titre = $request->titre;
             $update->src = 'newbig-logo.png';
             $update->src_intervention = 'newlogo.png';
             Image::make($request->file('src'))->resize(504,148)->save('img/newbig-logo.png');
@@ -81,6 +82,7 @@ class LogoController extends Controller
             $update->save();
             return redirect()->back();
         } else {
+            $update->titre = $request->titre;
             Storage::disk('public')->delete('img/'.$update->src);
             Storage::disk('public')->delete('img/'.$update->src_intervention);
             Image::make($request->file('src'))->resize(504,148)->save('img/newbig-logo.png');
@@ -88,6 +90,14 @@ class LogoController extends Controller
             $update->save();
             return redirect()->back();
         }
+    }
+
+    public function titlechange(Request $request,$id)
+    {
+        $titlechange = Logo::find($id);
+        $titlechange->titre = $request->titre;
+        $titlechange->save();
+        return redirect()->back();
     }
 
     /**
