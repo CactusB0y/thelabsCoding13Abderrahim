@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @include('backoffice.partials.headerContent')
+                    @include('backoffice.partials.homeContent')
                 </div>
             </div>
         </div>

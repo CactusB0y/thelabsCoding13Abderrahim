@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
+use App\Models\About;
 use App\Models\Caroussel;
 use App\Models\Navbar;
 use App\Models\Logo;
@@ -24,7 +26,10 @@ Route::get('/', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
     $caroussels = Caroussel::all();
-    return view('welcome',compact('navbars','logos','caroussels'));
+    $abouts = About::first();
+    $str = Str::of($abouts->titre)->replace('(', '<span>');
+    $str2 = Str::of($str)->replace(')', '</span>');
+    return view('welcome',compact('navbars','logos','caroussels','abouts','str2'));
 });
 
 Route::get('/service', function () {
@@ -49,6 +54,9 @@ Route::resource('navbar', NavbarController::class);
 Route::post('/titlechange/{id}', [LogoController::class, 'titlechange']);
 Route::resource('logo', LogoController::class);
 Route::resource('caroussel', CarousselController::class);
+Route::post('/imagevideo/{id}', [AboutController::class, 'imagevideo']);
+Route::post('/urlvideo/{id}', [AboutController::class, 'urlvideo']);
+Route::resource('about', AboutController::class);
 
 Auth::routes();
 

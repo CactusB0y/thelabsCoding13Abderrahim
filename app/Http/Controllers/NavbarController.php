@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Caroussel;
 use App\Models\Logo;
 use App\Models\Navbar;
@@ -19,7 +20,8 @@ class NavbarController extends Controller
         $navbars = Navbar::all();
         $logo = Logo::first();
         $caroussels = Caroussel::all();
-        return view('backoffice.header',compact('navbars','logo','caroussels'));
+        $abouts = About::first();
+        return view('backoffice.homePage',compact('navbars','logo','caroussels','abouts'));
     }
 
     /**

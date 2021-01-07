@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             NavbarSeeder::class,
             UserSeeder::class,
             LogoSeeder::class,
-            CarousselSeeder::class
+            CarousselSeeder::class,
+            AboutSeeder::class
         ]);
     }
 }
