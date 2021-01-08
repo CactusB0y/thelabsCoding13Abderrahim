@@ -4,10 +4,13 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\TitreController;
 use App\Models\About;
 use App\Models\Caroussel;
+use App\Models\Choice;
 use App\Models\Navbar;
 use App\Models\Logo;
+use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Titre;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +41,10 @@ Route::get('/', function () {
     $caroussels = Caroussel::all();
     $abouts = About::first();
     $testimonials = Testimonial::all()->sortDesc();
-    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab'));
+    $choix = Choice::first();
+    $random = Team::all()->except($choix->team_id)->random(1);
+    $random2= Team::all()->except($choix->team_id)->except($random[0]->id)->random(1);
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix'));
 });
 
 Route::get('/service', function () {
@@ -66,6 +72,7 @@ Route::resource('caroussel', CarousselController::class);
 Route::post('/imagevideo/{id}', [AboutController::class, 'imagevideo']);
 Route::post('/urlvideo/{id}', [AboutController::class, 'urlvideo']);
 Route::resource('about', AboutController::class);
+Route::resource('titre', TitreController::class);
 
 Auth::routes();
 

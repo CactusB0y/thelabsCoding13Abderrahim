@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Caroussel;
+use App\Models\Logo;
+use App\Models\Navbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -17,7 +20,11 @@ class AboutController extends Controller
      */
     public function index()
     {
-        //
+        $navbars = Navbar::all();
+        $logo = Logo::first();
+        $caroussels = Caroussel::all();
+        $abouts = About::first();
+        return view('backoffice.aboutPage',compact('navbars','logo','caroussels','abouts'));
     }
 
     /**
@@ -73,7 +80,6 @@ class AboutController extends Controller
     public function update(Request $request, $id)
     {
         $update = About::find($id);
-        $update->titre = $request->titre;
         $update->col_gauche = $request->col_gauche;
         $update->col_droite = $request->col_droite;
         $update->btn_nom = $request->btn_nom;

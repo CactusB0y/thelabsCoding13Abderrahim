@@ -267,7 +267,7 @@ return [
         ],
         ['header' => 'website_settings'],
         [
-            'text'    => 'Modification',
+            'text'    => 'Navbar, Caroussel & Logo',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -277,6 +277,28 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'Abouts & Video',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/about',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Titre, Teams & Testimonials',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/titre',
+                ],
+            ],
+        ]
     ],
 
     /*

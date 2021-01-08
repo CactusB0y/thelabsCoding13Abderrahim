@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             TeamSeeder::class,
             TestimonialSeeder::class,
-            TitreSeeder::class
+            TitreSeeder::class,
+            ChoiceSeeder::class
         ]);
     }
 }

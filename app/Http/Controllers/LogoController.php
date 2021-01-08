@@ -90,14 +90,6 @@ class LogoController extends Controller
         }
     }
 
-    public function titlechange(Request $request,$id)
-    {
-        $titlechange = Logo::find($id);
-        $titlechange->titre = $request->titre;
-        $titlechange->save();
-        return redirect()->back();
-    }
-
     /**
      * Remove the specified resource from storage.
      *
