@@ -8,6 +8,8 @@ use App\Models\About;
 use App\Models\Caroussel;
 use App\Models\Navbar;
 use App\Models\Logo;
+use App\Models\Testimonial;
+use App\Models\Titre;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,13 +25,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //
+    $titre = Titre::all();
+    $tab = [];
+    foreach($titre as $title){
+        $str = Str::of($title->titre)->replace('(', '<span>');
+        $str2 = Str::of($str)->replace(')','</span>');
+        array_push($tab, $str2);
+    }
     $navbars = Navbar::all();
     $logos = Logo::all();
     $caroussels = Caroussel::all();
     $abouts = About::first();
-    $str = Str::of($abouts->titre)->replace('(', '<span>');
-    $str2 = Str::of($str)->replace(')', '</span>');
-    return view('welcome',compact('navbars','logos','caroussels','abouts','str2'));
+    $testimonials = Testimonial::all()->sortDesc();
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab'));
 });
 
 Route::get('/service', function () {

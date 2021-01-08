@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             LogoSeeder::class,
             CarousselSeeder::class,
-            AboutSeeder::class
+            AboutSeeder::class,
+            TeamSeeder::class,
+            TestimonialSeeder::class,
+            TitreSeeder::class
         ]);
     }
 }

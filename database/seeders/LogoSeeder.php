@@ -18,8 +18,7 @@ class LogoSeeder extends Seeder
             [
                 [
                     'src' => 'big-logo.png',
-                    'src_intervention' => 'logo.png',
-                    'titre' => 'Get your freebie template now!'
+                    'src_intervention' => 'logo.png'
                 ]
             ]
         );

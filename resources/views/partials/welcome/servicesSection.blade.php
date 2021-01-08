@@ -2,7 +2,7 @@
 	<div class="services-section spad">
 		<div class="container">
 			<div class="section-title dark">
-				<h2>Get in <span>the Lab</span> and see the services</h2>
+				<h2>{!! $tab[3] !!}</h2>
 			</div>
 			<div class="row">
 				<!-- single service -->

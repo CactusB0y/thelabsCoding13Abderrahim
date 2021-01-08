@@ -4,7 +4,7 @@
         <div class="hero-center">
             @foreach ($logos as $logo)
                 <img src="{{asset('img/'.$logo->src)}}" alt="">   
-                <p>{{$logo->titre}}</p>
+                <p>{!! $tab[0] !!}</p>
             @endforeach
         </div>
     </div>

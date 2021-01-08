@@ -45,7 +45,7 @@
 			<div class="about-contant">
 				<div class="container">
 					<div class="section-title">
-						<h2>{!! $str2 !!}</h2>
+						<h2>{!! $tab[1] !!}</h2>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
