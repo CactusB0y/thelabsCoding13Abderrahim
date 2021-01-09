@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Caroussel;
+use App\Models\Choice;
 use App\Models\Logo;
 use App\Models\Navbar;
+use App\Models\Team;
 use App\Models\Titre;
 use Illuminate\Http\Request;
 
@@ -18,11 +20,10 @@ class TitreController extends Controller
      */
     public function index()
     {
-        $navbars = Navbar::all();
-        $logo = Logo::first();
-        $caroussels = Caroussel::all();
-        $abouts = About::first();
-        return view('backoffice.titrePage',compact('navbars','logo','caroussels','abouts'));
+        $titres = Titre::all();
+        $teams = Team::all();
+        $choice = Choice::first();
+        return view('backoffice.titrePage',compact('titres','teams','choice'));
     }
 
     /**
@@ -63,9 +64,10 @@ class TitreController extends Controller
      * @param  \App\Models\Titre  $titre
      * @return \Illuminate\Http\Response
      */
-    public function edit(Titre $titre)
+    public function edit($id)
     {
-        //
+        $edit = Titre::find($id);
+        return view('backoffice.titreEdit',compact('edit'));
     }
 
     /**
@@ -75,9 +77,12 @@ class TitreController extends Controller
      * @param  \App\Models\Titre  $titre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Titre $titre)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Titre::find($id);
+        $update->titre = $request->titre;
+        $update->save();
+        return redirect('/titre');
     }
 
     /**

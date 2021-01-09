@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Choice;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class TeamController extends Controller
 {
@@ -24,7 +27,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('backoffice.teamAdd');
     }
 
     /**
@@ -35,7 +38,16 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Team;
+        $store->nom = $request->nom;
+        $store->prenom = $request->prenom;
+        $store->role = $request->role;
+        $store->src = $request->file('src')->hashName();
+        $store->src_avatar = $request->file('src')->hashName();
+        $store->save();
+        Image::make($request->file('src'))->resize(360,448)->save('img/team/'.$store->src);
+        Image::make($request->file('src'))->resize(117,117)->save('img/avatar/'.$store->src_avatar);
+        return redirect('/titre');
     }
 
     /**
@@ -55,9 +67,10 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function edit(Team $team)
+    public function edit($id)
     {
-        //
+        $edit = Team::find($id);
+        return view('backoffice.teamEdit',compact('edit'));
     }
 
     /**
@@ -67,9 +80,42 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Team::find($id);
+        $update->nom = $request->nom;
+        $update->prenom = $request->prenom;
+        $update->save();
+        return redirect('/titre');
+    }
+
+    public function teamProfil(Request $request,$id)
+    {
+        $teamprofil = Team::find($id);
+        if($teamprofil->src == '2.jpg' || $teamprofil->src == '3.jpg' || $teamprofil->src == '1.jpg' ){
+            $teamprofil->src = 'new'.$teamprofil->src;
+            $teamprofil->src_avatar = 'new'.$teamprofil->src_avatar;
+            Image::make($request->file('src'))->resize(360,448)->save('img/team/'.$teamprofil->src);
+            Image::make($request->file('src'))->resize(117,117)->save('img/avatar/'.$teamprofil->src_avatar);
+            $teamprofil->save();
+        } else {
+            Storage::disk('public')->delete('img/team/'.$teamprofil->src);
+            Storage::disk('public')->delete('img/avatar/'.$teamprofil->src);
+            $teamprofil->src = 'new'.$teamprofil->src;
+            $teamprofil->src_avatar = 'new'.$teamprofil->src_avatar;
+            Image::make($request->file('src'))->resize(360,448)->save('img/team/'.$teamprofil->src);
+            Image::make($request->file('src'))->resize(117,117)->save('img/avatar/'.$teamprofil->src_avatar);
+            $teamprofil->save();
+        }
+        return redirect('/titre');
+    }
+
+    public function main(Request $request, $id)
+    {
+        $main = Choice::find($id);
+        $main->team_id = $request->team_id;
+        $main->save();
+        return redirect('/titre');
     }
 
     /**
@@ -78,8 +124,16 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Team $team)
+    public function destroy($id)
     {
-        //
+        $delete = Team::find($id);
+        if ($delete->src == '2.jpg' || $delete->src == '3.jpg' || $delete->src == '1.jpg'){
+            $delete->delete();
+        } else {
+            Storage::disk('public')->delete('img/team/'.$delete->src);
+            Storage::disk('public')->delete('img/avatar/'.$delete->src_avatar);
+            $delete->delete();
+        }
+        return redirect('/titre');
     }
 }

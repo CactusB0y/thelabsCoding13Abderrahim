@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TitreController;
 use App\Models\About;
 use App\Models\Caroussel;
@@ -73,6 +74,9 @@ Route::post('/imagevideo/{id}', [AboutController::class, 'imagevideo']);
 Route::post('/urlvideo/{id}', [AboutController::class, 'urlvideo']);
 Route::resource('about', AboutController::class);
 Route::resource('titre', TitreController::class);
+Route::post('/teamProfil/{id}', [TeamController::class,'teamProfil']);
+Route::post('/main/{id}', [TeamController::class, 'main']);
+Route::resource('team', TeamController::class);
 
 Auth::routes();
 

@@ -21,24 +21,21 @@ class TeamSeeder extends Seeder
                     'prenom' => 'Christinne',
                     'role' => 'CEO',
                     'src' => '2.jpg',
-                    'src_avatar' => '02.jpg',
-                    'prio' => true
+                    'src_avatar' => '02.jpg'
                 ],
                 [
                     'nom' => 'Richards',
                     'prenom' => 'Abdoul',
                     'role' => 'Digital Designer',
                     'src' => '3.jpg',
-                    'src_avatar' => '04.jpg',
-                    'prio' => false
+                    'src_avatar' => '04.jpg'
                 ],
                 [
                     'nom' => 'Rien',
                     'prenom' => 'Laura',
                     'role' => 'Project Manager',
                     'src' => '1.jpg',
-                    'src_avatar' => '03.jpg',
-                    'prio' => false
+                    'src_avatar' => '03.jpg'
                 ]
             ]
         );

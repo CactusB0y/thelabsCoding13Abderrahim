@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Abouts & Video</h1>
+    <h1 class="m-0 text-dark">Modification du titre</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @include('backoffice.partials.aboutContent')
+                    @include('backoffice.partials.titreEditContent')
                 </div>
             </div>
         </div>

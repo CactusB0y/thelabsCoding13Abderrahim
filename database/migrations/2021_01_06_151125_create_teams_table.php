@@ -20,7 +20,6 @@ class CreateTeamsTable extends Migration
             $table->string('role');
             $table->string('src');
             $table->string('src_avatar')->nullable();
-            $table->boolean('prio');
             $table->timestamps();
         });
     }
