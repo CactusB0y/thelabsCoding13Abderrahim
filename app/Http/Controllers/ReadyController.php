@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
-use App\Models\Testimonial;
+use App\Models\Ready;
 use Illuminate\Http\Request;
 
-class TestimonialController extends Controller
+class ReadyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,8 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        //
+        $ready = Ready::first();
+        return view('backoffice.readyPage',compact('ready'));
     }
 
     /**
@@ -25,8 +25,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        $teams = Team::all();
-        return view('backoffice.testimonialAdd',compact('teams'));
+        //
     }
 
     /**
@@ -37,20 +36,16 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        $store = new Testimonial;
-        $store->team_id = $request->team_id;
-        $store->testimonial = $request->testimonial;
-        $store->save();
-        return redirect('/titre');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Testimonial  $testimonial
+     * @param  \App\Models\Ready  $ready
      * @return \Illuminate\Http\Response
      */
-    public function show(Testimonial $testimonial)
+    public function show(Ready $ready)
     {
         //
     }
@@ -58,42 +53,40 @@ class TestimonialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Testimonial  $testimonial
+     * @param  \App\Models\Ready  $ready
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ready $ready)
     {
-        $edit = Testimonial::find($id);
-        $teams = Team::all();
-        return view('backoffice.testimonialEdit',compact('edit','teams'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Testimonial  $testimonial
+     * @param  \App\Models\Ready  $ready
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $update = Testimonial::find($id);
-        $update->team_id = $request->team_id;
-        $update->testimonial = $request->testimonial;
+        $update = Ready::find($id);
+        $update->titre = $request->titre;
+        $update->sous_titre = $request->sous_titre;
+        $update->bouton_nom = $request->bouton_nom;
+        $update->bouton_url = $request->bouton_url;
         $update->save();
-        return redirect('/titre');
+        return redirect('/ready');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Testimonial  $testimonial
+     * @param  \App\Models\Ready  $ready
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ready $ready)
     {
-        $delete = Testimonial::find($id);
-        $delete->delete();
-        return redirect('/titre');
+        //
     }
 }

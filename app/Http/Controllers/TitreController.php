@@ -8,6 +8,7 @@ use App\Models\Choice;
 use App\Models\Logo;
 use App\Models\Navbar;
 use App\Models\Team;
+use App\Models\Testimonial;
 use App\Models\Titre;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class TitreController extends Controller
         $titres = Titre::all();
         $teams = Team::all();
         $choice = Choice::first();
-        return view('backoffice.titrePage',compact('titres','teams','choice'));
+        $testimonials = Testimonial::all();
+        return view('backoffice.titrePage',compact('titres','teams','choice','testimonials'));
     }
 
     /**

@@ -298,6 +298,17 @@ return [
                     'url'  => '/titre',
                 ],
             ],
+        ],
+        [
+            'text'    => 'Ready',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/ready',
+                ],
+            ],
         ]
     ],
 

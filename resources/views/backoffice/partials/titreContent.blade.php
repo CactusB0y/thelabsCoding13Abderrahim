@@ -95,4 +95,39 @@
               </div>
         </div>
     </div>
+    <div class="container mt-5">
+        <div class="row">
+            <a class="btn btn-success mb-3" href="/testimonial/create">Ajouter un testimonial</a>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Testimonials</th>
+                    <th scope="col">auteur</th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($testimonials as $testimonial)
+                        <tr>
+                            <th scope="row">{{$testimonial->id}}</th>
+                            <td>{{$testimonial->testimonial}}</td>
+                            <td>{{$testimonial->teams->nom}} {{$testimonial->teams->prenom}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="/testimonial/{{$testimonial->id}}/edit"><i class="fas fa-edit">edit</i></a>
+                            </td>
+                            <td>
+                                <form role="form" action="/testimonial/{{$testimonial->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash">delete</i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+              </table>
+        </div>
+    </div>
 </div>

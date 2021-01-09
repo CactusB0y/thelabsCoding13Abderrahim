@@ -4,13 +4,16 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\ReadyController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TitreController;
 use App\Models\About;
 use App\Models\Caroussel;
 use App\Models\Choice;
 use App\Models\Navbar;
 use App\Models\Logo;
+use App\Models\Ready;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Titre;
@@ -41,11 +44,12 @@ Route::get('/', function () {
     $logos = Logo::all();
     $caroussels = Caroussel::all();
     $abouts = About::first();
-    $testimonials = Testimonial::all()->sortDesc();
+    $testimonials = Testimonial::all()->sortDesc()->take(6);
     $choix = Choice::first();
     $random = Team::all()->except($choix->team_id)->random(1);
     $random2= Team::all()->except($choix->team_id)->except($random[0]->id)->random(1);
-    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix'));
+    $ready = Ready::first();
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready'));
 });
 
 Route::get('/service', function () {
@@ -77,6 +81,8 @@ Route::resource('titre', TitreController::class);
 Route::post('/teamProfil/{id}', [TeamController::class,'teamProfil']);
 Route::post('/main/{id}', [TeamController::class, 'main']);
 Route::resource('team', TeamController::class);
+Route::resource('testimonial', TestimonialController::class);
+Route::resource('ready', ReadyController::class);
 
 Auth::routes();
 
