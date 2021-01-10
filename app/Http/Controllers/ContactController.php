@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use App\Models\Footer;
-use App\Models\Ready;
 use Illuminate\Http\Request;
 
-class ReadyController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,7 @@ class ReadyController extends Controller
      */
     public function index()
     {
-        $ready = Ready::first();
-        $contact = Contact::first();
-        $footer = Footer::first();
-        return view('backoffice.readyPage',compact('ready','contact','footer'));
+        //
     }
 
     /**
@@ -46,10 +41,10 @@ class ReadyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Ready $ready)
+    public function show(Contact $contact)
     {
         //
     }
@@ -57,10 +52,10 @@ class ReadyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ready $ready)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -69,27 +64,31 @@ class ReadyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $update = Ready::find($id);
+        $update = Contact::find($id);
         $update->titre = $request->titre;
+        $update->texte = $request->texte;
         $update->sous_titre = $request->sous_titre;
-        $update->bouton_nom = $request->bouton_nom;
-        $update->bouton_url = $request->bouton_url;
+        $update->rue = $request->rue;
+        $update->code_postal = $request->code_postal;
+        $update->region = $request->region;
+        $update->tel = $request->tel;
+        $update->email = $request->email;
         $update->save();
-        return redirect('/ready');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ready $ready)
+    public function destroy(Contact $contact)
     {
         //
     }

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
 use App\Models\Footer;
-use App\Models\Ready;
 use Illuminate\Http\Request;
 
-class ReadyController extends Controller
+class FooterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,7 @@ class ReadyController extends Controller
      */
     public function index()
     {
-        $ready = Ready::first();
-        $contact = Contact::first();
-        $footer = Footer::first();
-        return view('backoffice.readyPage',compact('ready','contact','footer'));
+        //
     }
 
     /**
@@ -46,10 +41,10 @@ class ReadyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Footer  $footer
      * @return \Illuminate\Http\Response
      */
-    public function show(Ready $ready)
+    public function show(Footer $footer)
     {
         //
     }
@@ -57,10 +52,10 @@ class ReadyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Footer  $footer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ready $ready)
+    public function edit(Footer $footer)
     {
         //
     }
@@ -69,27 +64,26 @@ class ReadyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Footer  $footer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $update = Ready::find($id);
-        $update->titre = $request->titre;
-        $update->sous_titre = $request->sous_titre;
-        $update->bouton_nom = $request->bouton_nom;
-        $update->bouton_url = $request->bouton_url;
+        $update = Footer::find($id);
+        $update->texte = $request->texte;
+        $update->nom_lien = $request->nom_lien;
+        $update->lien = $request->lien;
         $update->save();
-        return redirect('/ready');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ready  $ready
+     * @param  \App\Models\Footer  $footer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ready $ready)
+    public function destroy(Footer $footer)
     {
         //
     }

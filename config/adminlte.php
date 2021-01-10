@@ -300,7 +300,7 @@ return [
             ],
         ],
         [
-            'text'    => 'Ready',
+            'text'    => 'Ready, Contact Us, Footer',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [

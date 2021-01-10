@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Contact;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +24,9 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             TitreSeeder::class,
             ChoiceSeeder::class,
-            ReadySeeder::class
+            ReadySeeder::class,
+            ContactSeeder::class,
+            FooterSeeder::class
         ]);
     }
 }

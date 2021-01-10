@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CarousselController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FooterController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\ReadyController;
@@ -11,6 +13,8 @@ use App\Http\Controllers\TitreController;
 use App\Models\About;
 use App\Models\Caroussel;
 use App\Models\Choice;
+use App\Models\Contact;
+use App\Models\Footer;
 use App\Models\Navbar;
 use App\Models\Logo;
 use App\Models\Ready;
@@ -49,7 +53,9 @@ Route::get('/', function () {
     $random = Team::all()->except($choix->team_id)->random(1);
     $random2= Team::all()->except($choix->team_id)->except($random[0]->id)->random(1);
     $ready = Ready::first();
-    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready'));
+    $contact = Contact::first();
+    $footer = Footer::first();
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer'));
 });
 
 Route::get('/service', function () {
@@ -83,6 +89,8 @@ Route::post('/main/{id}', [TeamController::class, 'main']);
 Route::resource('team', TeamController::class);
 Route::resource('testimonial', TestimonialController::class);
 Route::resource('ready', ReadyController::class);
+Route::resource('contact', ContactController::class);
+Route::resource('footer', FooterController::class);
 
 Auth::routes();
 

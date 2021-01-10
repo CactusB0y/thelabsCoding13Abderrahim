@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Ready</h1>
+    <h1 class="m-0 text-dark">Ready, Contact Us</h1>
 @stop
 
 @section('content')
