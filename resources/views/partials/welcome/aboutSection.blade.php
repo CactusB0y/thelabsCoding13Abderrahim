@@ -5,18 +5,20 @@
 		<div class="card-section">
 			<div class="container">
 				<div class="row">
-					<!-- single card -->
-					<div class="col-md-4 col-sm-6">
-						<div class="lab-card">
-							<div class="icon">
-								<i class="flaticon-023-flask"></i>
+					@foreach ($randomServices as $randomService)
+						<div class="col-md-4 col-sm-6">
+							<div class="lab-card">
+								<div class="icon">
+									<i class="{{$randomService->icons->image}}"></i>
+								</div>
+								<h2>{{$randomService->titre}}</h2>
+								<p>{{$randomService->text}}</p>
 							</div>
-							<h2>Get in the lab</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
 						</div>
-					</div>
+					@endforeach
 					<!-- single card -->
-					<div class="col-md-4 col-sm-6">
+					<!-- single card -->
+					{{-- <div class="col-md-4 col-sm-6">
 						<div class="lab-card">
 							<div class="icon">
 								<i class="flaticon-011-compass"></i>
@@ -24,9 +26,9 @@
 							<h2>Projects online</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
 						</div>
-					</div>
+					</div> --}}
 					<!-- single card -->
-					<div class="col-md-4 col-sm-12">
+					{{-- <div class="col-md-4 col-sm-12">
 						<div class="lab-card">
 							<div class="icon">
 								<i class="flaticon-037-idea"></i>
@@ -34,7 +36,7 @@
 							<h2>SMART MARKETING</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

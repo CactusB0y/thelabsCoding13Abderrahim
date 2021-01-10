@@ -18,6 +18,7 @@ use App\Models\Footer;
 use App\Models\Navbar;
 use App\Models\Logo;
 use App\Models\Ready;
+use App\Models\Service;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Titre;
@@ -55,13 +56,16 @@ Route::get('/', function () {
     $ready = Ready::first();
     $contact = Contact::first();
     $footer = Footer::first();
-    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer'));
+    $randomServices = Service::all()->random(3);
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer','randomServices'));
 });
 
 Route::get('/service', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
-    return view('service',compact('navbars','logos'));
+    $contact = Contact::first();
+    $footer = Footer::first();
+    return view('service',compact('navbars','logos','contact','footer'));
 });
 
 Route::get('/blog', function () {
@@ -73,7 +77,8 @@ Route::get('/blog', function () {
 Route::get('/contact', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
-    return view('contact',compact('navbars','logos'));
+    $contact = Contact::first();
+    return view('contact',compact('navbars','logos','contact'));
 });
 
 Route::resource('navbar', NavbarController::class);
