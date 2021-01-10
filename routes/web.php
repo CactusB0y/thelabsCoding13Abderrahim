@@ -57,7 +57,8 @@ Route::get('/', function () {
     $contact = Contact::first();
     $footer = Footer::first();
     $randomServices = Service::all()->random(3);
-    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer','randomServices'));
+    $services = Service::all();
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer','randomServices','services'));
 });
 
 Route::get('/service', function () {
@@ -65,7 +66,15 @@ Route::get('/service', function () {
     $logos = Logo::all();
     $contact = Contact::first();
     $footer = Footer::first();
-    return view('service',compact('navbars','logos','contact','footer'));
+    $services = Service::all();
+    $titre = Titre::all();
+    $tab = [];
+    foreach($titre as $title){
+        $str = Str::of($title->titre)->replace('(', '<span>');
+        $str2 = Str::of($str)->replace(')','</span>');
+        array_push($tab, $str2);
+    }
+    return view('service',compact('navbars','logos','contact','footer','services','tab'));
 });
 
 Route::get('/blog', function () {

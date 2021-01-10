@@ -1,7 +1,7 @@
 @extends('template.main')
 @section('content')
     @include('partials.service.headerSection')
-    @include('partials.service.servicesSection')
+    @include('partials.welcome.servicesSection')
     @include('partials.service.featuresSection')
     @include('partials.service.servicescardSection')
     @include('partials.service.newsletterSection')
