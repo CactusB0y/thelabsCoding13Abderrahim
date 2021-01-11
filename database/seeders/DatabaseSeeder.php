@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             IconeSeeder::class,
             ServiceSeeder::class,
             IconePrimeSeeder::class,
-            ServicePrimeSeeder::class
+            ServicePrimeSeeder::class,
+            MapSeeder::class
         ]);
     }
 }

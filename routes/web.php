@@ -20,6 +20,7 @@ use App\Models\Contact;
 use App\Models\Footer;
 use App\Models\Navbar;
 use App\Models\Logo;
+use App\Models\Map;
 use App\Models\Ready;
 use App\Models\Service;
 use App\Models\ServicePrime;
@@ -95,7 +96,8 @@ Route::get('/contactpage', function () {
     $logos = Logo::all();
     $contact = Contact::first();
     $footer = Footer::first();
-    return view('contact',compact('navbars','logos','contact','footer'));
+    $map = Map::first();
+    return view('contact',compact('navbars','logos','contact','footer','map'));
 });
 
 Route::resource('navbar', NavbarController::class);
