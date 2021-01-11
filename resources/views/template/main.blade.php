@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth">
 <head>
 	<title>Labs - Design Studio</title>
 	<meta charset="UTF-8">

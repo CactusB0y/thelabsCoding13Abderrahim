@@ -14,7 +14,7 @@
 					<p class="con-item">{{$contact->email}}</p>
 				</div>
 				<!-- contact form -->
-				<div class="col-md-6 col-pull">
+				<div id="contact" class="col-md-6 col-pull">
 					<form class="form-class" id="con_form">
 						<div class="row">
 							<div class="col-sm-6">

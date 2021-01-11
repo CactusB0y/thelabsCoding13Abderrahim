@@ -4,9 +4,12 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\IconeController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\ReadyController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServicePrimeController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TitreController;
@@ -19,6 +22,7 @@ use App\Models\Navbar;
 use App\Models\Logo;
 use App\Models\Ready;
 use App\Models\Service;
+use App\Models\ServicePrime;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Titre;
@@ -57,16 +61,16 @@ Route::get('/', function () {
     $contact = Contact::first();
     $footer = Footer::first();
     $randomServices = Service::all()->random(3);
-    $services = Service::all();
-    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer','randomServices','services'));
+    $pagination = Service::paginate(9);
+    return view('welcome',compact('navbars','logos','caroussels','abouts','testimonials','tab','random','random2','choix','ready','contact','footer','randomServices','pagination'));
 });
 
-Route::get('/service', function () {
+Route::get('/servicepage', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
     $contact = Contact::first();
     $footer = Footer::first();
-    $services = Service::all();
+    $pagination = Service::paginate(9);
     $titre = Titre::all();
     $tab = [];
     foreach($titre as $title){
@@ -74,20 +78,24 @@ Route::get('/service', function () {
         $str2 = Str::of($str)->replace(')','</span>');
         array_push($tab, $str2);
     }
-    return view('service',compact('navbars','logos','contact','footer','services','tab'));
+    $servicesPrimes = ServicePrime::all()->sortDesc()->take(6);
+    $limite = 0;
+    return view('service',compact('navbars','logos','contact','footer','pagination','tab','servicesPrimes','limite'));
 });
 
 Route::get('/blog', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
-    return view('blog',compact('navbars','logos'));
+    $footer = Footer::first();
+    return view('blog',compact('navbars','logos','footer'));
 });
 
-Route::get('/contact', function () {
+Route::get('/contactpage', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
     $contact = Contact::first();
-    return view('contact',compact('navbars','logos','contact'));
+    $footer = Footer::first();
+    return view('contact',compact('navbars','logos','contact','footer'));
 });
 
 Route::resource('navbar', NavbarController::class);
@@ -105,6 +113,9 @@ Route::resource('testimonial', TestimonialController::class);
 Route::resource('ready', ReadyController::class);
 Route::resource('contact', ContactController::class);
 Route::resource('footer', FooterController::class);
+Route::resource('icon', IconeController::class);
+Route::resource('service', ServiceController::class);
+Route::resource('serviceprime', ServicePrimeController::class);
 
 Auth::routes();
 

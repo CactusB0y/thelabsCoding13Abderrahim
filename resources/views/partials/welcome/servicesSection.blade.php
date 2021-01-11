@@ -5,7 +5,7 @@
 				<h2>{!! $tab[3] !!}</h2>
 			</div>
 			<div class="row">
-				@foreach ($services as $service)
+				@foreach ($pagination as $service)
 					<div class="col-md-4 col-sm-6">
 						<div class="service">
 							<div class="icon">
@@ -19,7 +19,10 @@
 					</div>
 				@endforeach
 			</div>
-			<div class="text-center">
+			<div class="mb-5" style="margin-left: 44.5%">
+					{{$pagination->fragment('services')->links('vendor.pagination.bootstrap-4')}}
+			</div>
+			<div class="text-center mt-5">
 				<a href="" class="site-btn">Browse</a>
 			</div>
 		</div>

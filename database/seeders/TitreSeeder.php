@@ -30,7 +30,10 @@ class TitreSeeder extends Seeder
                 ],
                 [
                     'titre' => 'GET IN (THE LAB) AND MEET THE TEAM'
-                ]
+                ],
+                [
+                    'titre' => 'GET IN (THE LAB) AND DISCOVER THE WORLD'
+                ] 
             ]
         );
     }

@@ -22,7 +22,7 @@ class NavbarSeeder extends Seeder
                 ],
                 [
                     'button' => 'Services',
-                    'url' => '/service',
+                    'url' => '/servicepage',
                 ],
                 [
                     'button' => 'Blog',
@@ -30,7 +30,7 @@ class NavbarSeeder extends Seeder
                 ],
                 [
                     'button' => 'Contact',
-                    'url' => '/contact',
+                    'url' => '/contactpage',
                 ]
             ]
         );
