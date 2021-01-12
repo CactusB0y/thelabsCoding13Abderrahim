@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Icone;
+use App\Models\IconePrime;
 use App\Models\Service;
+use App\Models\ServicePrime;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -14,7 +17,11 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::paginate(5);
+        $servicePrimes = ServicePrime::paginate(5);
+        $icons = Icone::all();
+        $iconPrimes = IconePrime::all();
+        return view('backoffice.servicePage',compact('services','servicePrimes','icons','iconPrimes'));
     }
 
     /**
@@ -78,8 +85,10 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
-        //
+        $delete = Service::find($id);
+        $delete->delete();
+        return redirect('/service');
     }
 }
