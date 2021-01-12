@@ -34,8 +34,6 @@
 							</div>
 						</div>
 					@endforeach
-					<!-- Pagination -->
-					{{$articles->fragment('articles')->links('vendor.pagination.bootstrap-4')}}
 				</div>
 				<!-- Sidebar area -->
 				<div class="col-md-4 col-sm-5 sidebar">

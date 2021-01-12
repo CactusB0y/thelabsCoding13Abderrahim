@@ -17,38 +17,44 @@
 							<div class="post-meta">
 								<a href="">{{$show->users->name}}</a>
 								<a href="">
-                                    @foreach ($show->tags as $tag)
-											{{$tag->tag}}
+                                    @foreach ($show->tags as $tag) 
+                                        @if ($tag == $show->tags->last())
+                                            {{$tag->tag}}
+                                            @else
+                                            {{$tag->tag}},
+                                        @endif
 									@endforeach
                                 </a>
-								<a href="">2 Comments</a>
+								<a href="">{{count($show->comments)}} Comments</a>
 							</div>
 							<p>{{$show->texte}}</p>
 						</div>
 						<!-- Post Author -->
 						<div class="author">
 							<div class="avatar">
-								<img src="img/avatar/03.jpg" alt="">
+								<img height="117px" width="117px" src="{{asset('img/avatar/'.$show->users->src)}}" alt="">
 							</div>
 							<div class="author-info">
-								<h2>{{$show->users->name}}, <span>{{$show->users->role}}</span></h2>
-								<p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
+								<h2>{{$show->users->prenom}} {{$show->users->name}}, <span>{{$show->users->role}}</span></h2>
+								<p>{{$show->users->description}}</p>
 							</div>
 						</div>
 						<!-- Post Comments -->
 						<div class="comments">
-							<h2>Comments (2)</h2>
+							<h2>Comments ({{count($show->comments)}})</h2>
 							<ul class="comment-list">
-								<li>
-									<div class="avatar">
-										<img src="img/avatar/01.jpg" alt="">
-									</div>
-									<div class="commetn-text">
-										<h3>Michael Smith | 03 nov, 2017 | Reply</h3>
-										<p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
-									</div>
-								</li>
-								<li>
+                                @foreach ($show->comments as $comment)
+                                    <li>
+                                        <div class="avatar">
+                                            <img src={{asset("img/avatar/".$comment->users->src)}} alt="">
+                                        </div>
+                                        <div class="commetn-text">
+                                            <h3>{{$comment->users->prenom}} {{$comment->users->name}} | {{$comment->created_at->format('d')}} {{$comment->created_at->format('M')}}, {{$comment->created_at->format('Y')}} | Reply</h3>
+                                            <p>{{$comment->message}}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+								{{-- <li>
 									<div class="avatar">
 										<img src="img/avatar/02.jpg" alt="">
 									</div>
@@ -56,25 +62,20 @@
 										<h3>Michael Smith | 03 nov, 2017 | Reply</h3>
 										<p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
 									</div>
-								</li>
+								</li> --}}
 							</ul>
 						</div>
 						<!-- Commert Form -->
 						<div class="row">
 							<div class="col-md-9 comment-from">
 								<h2>Leave a comment</h2>
-								<form class="form-class">
+								<form class="form-class" role="form" action="/comment" method="POST">
+									@csrf
+									<input name="article_id" value="{{$show->id}}" style="display: none" type="text">
 									<div class="row">
-										<div class="col-sm-6">
-											<input type="text" name="name" placeholder="Your name">
-										</div>
-										<div class="col-sm-6">
-											<input type="text" name="email" placeholder="Your email">
-										</div>
 										<div class="col-sm-12">
-											<input type="text" name="subject" placeholder="Subject">
 											<textarea name="message" placeholder="Message"></textarea>
-											<button class="site-btn">send</button>
+											<button type="submit" class="site-btn">send</button>
 										</div>
 									</div>
 								</form>

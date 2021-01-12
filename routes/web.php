@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CarousselController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\IconeController;
@@ -87,7 +88,8 @@ Route::get('/servicepage', function () {
     }
     $servicesPrimes = ServicePrime::all()->sortDesc()->take(6);
     $limite = 0;
-    return view('service',compact('navbars','logos','contact','footer','pagination','tab','servicesPrimes','limite'));
+    $articleRapides = Article::all()->sortDesc()->take(3);
+    return view('service',compact('navbars','logos','contact','footer','pagination','tab','servicesPrimes','limite','articleRapides'));
 });
 
 Route::get('/blog', function () {
@@ -96,7 +98,7 @@ Route::get('/blog', function () {
     $footer = Footer::first();
     $categories = Categorie::all();
     $tags = Tag::all();
-    $articles = Article::all()->sortDesc();
+    $articles = Article::paginate(3);
     return view('blog',compact('navbars','logos','footer','categories','tags','articles'));
 });
 
@@ -129,7 +131,9 @@ Route::resource('service', ServiceController::class);
 Route::resource('serviceprime', ServicePrimeController::class);
 Route::resource('categorie', CategorieController::class);
 Route::resource('tag', TagController::class);
+Route::get('search', [ArticleController::class,'search']);
 Route::resource('article', ArticleController::class);
+Route::resource('comment', CommentController::class);
 
 Auth::routes();
 

@@ -16,6 +16,10 @@ class Article extends Model
     {
         return $this->belongsToMany(Categorie::class);
     }
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
+    }
     public function users()
     {
         return $this->belongsTo(User::class,'user_id');

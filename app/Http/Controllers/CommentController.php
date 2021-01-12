@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Categorie;
-use App\Models\Footer;
-use App\Models\Logo;
-use App\Models\Navbar;
-use App\Models\Tag;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ArticleController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,20 +29,6 @@ class ArticleController extends Controller
         //
     }
 
-    public function search()
-    {
-        $search_text = $_GET['query'];
-
-        $articles = Article::where('titre','LIKE','%'. $search_text .'%')->get();
-        $categories = Categorie::all();
-        $tags = Tag::all();
-        $footer = Footer::first();
-        $logos = Logo::all();
-        $navbars = Navbar::all();
-        return view('searchpage', compact('articles','tags','categories','footer','logos','navbars'));
-
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -54,31 +37,33 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $articles = Article::find($request->article_id);
+        $store = new Comment;
+        $store->message = $request->message;
+        $store->user_id = Auth::user()->id;
+        $store->save();
+        $articles->comments()->attach($store->id);
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comment $comment)
     {
-        $show = Article::find($id);
-        $footer = Footer::first();
-        $logos = Logo::all();
-        $navbars = Navbar::all();
-        return view('blogShow',compact('show','footer','logos','navbars'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -87,10 +72,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -98,10 +83,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Comment $comment)
     {
         //
     }
