@@ -15,8 +15,8 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('icone_id');
-            $table->foreign('icone_id')->references('id')->on('icones');
+            $table->unsignedBigInteger('icone_id')->nullable();
+            $table->foreign('icone_id')->references('id')->on('icones')->onDelete('set null');
             $table->string('titre');
             $table->longText('text');
             $table->timestamps();

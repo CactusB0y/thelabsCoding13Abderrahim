@@ -241,7 +241,7 @@ return [
         ],
         [
             'text'        => 'Service',
-            'url'         => '/service',
+            'url'         => '/servicepage',
             'icon'        => 'fas fa-paperclip'
         ],
         [
@@ -320,7 +320,18 @@ return [
                     'url'  => '/service',
                 ],
             ],
-        ]
+        ],
+        // [
+        //     'text'    => 'Icones',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'voir',
+        //             'icon'    => 'fas fa-eye',
+        //             'url'  => '/icon',
+        //         ],
+        //     ],
+        // ]
     ],
 
     /*

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Icone;
+use App\Models\IconePrime;
+use App\Models\Service;
 use App\Models\ServicePrime;
 use Illuminate\Http\Request;
 
@@ -55,9 +58,11 @@ class ServicePrimeController extends Controller
      * @param  \App\Models\ServicePrime  $servicePrime
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServicePrime $servicePrime)
+    public function edit($id)
     {
-        //
+        $edit = ServicePrime::find($id);
+        $icons = IconePrime::all();
+        return view('backoffice.servicePrimeEdit',compact('edit','icons'));
     }
 
     /**
@@ -67,9 +72,14 @@ class ServicePrimeController extends Controller
      * @param  \App\Models\ServicePrime  $servicePrime
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ServicePrime $servicePrime)
+    public function update(Request $request, $id)
     {
-        //
+        $update = ServicePrime::find($id);
+        $update->titre = $request->titre;
+        $update->text = $request->text;
+        $update->icone_id = $request->icone_id;
+        $update->save();
+        return redirect('/service');
     }
 
     /**

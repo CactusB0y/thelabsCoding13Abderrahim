@@ -20,8 +20,8 @@ class ServiceController extends Controller
         $services = Service::paginate(5);
         $servicePrimes = ServicePrime::paginate(5);
         $icons = Icone::all();
-        $iconPrimes = IconePrime::all();
-        return view('backoffice.servicePage',compact('services','servicePrimes','icons','iconPrimes'));
+        $iconprimes = IconePrime::all();
+        return view('backoffice.servicePage',compact('services','servicePrimes','icons','iconprimes'));
     }
 
     /**
@@ -42,7 +42,12 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Service;
+        $store->titre = $request->titre;
+        $store->text = $request->text;
+        $store->icone_id = $request->icone_id;
+        $store->save();
+        return redirect()->back();
     }
 
     /**
@@ -62,9 +67,11 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit($id)
     {
-        //
+        $edit = Service::find($id);
+        $icons = Icone::all();
+        return view('backoffice.serviceEdit',compact('edit','icons'));
     }
 
     /**
@@ -74,9 +81,14 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Service::find($id);
+        $update->titre = $request->titre;
+        $update->text = $request->text;
+        $update->icone_id = $request->icone_id;
+        $update->save();
+        return redirect('/service');
     }
 
     /**

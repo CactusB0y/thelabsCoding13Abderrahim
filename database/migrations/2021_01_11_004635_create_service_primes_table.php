@@ -15,8 +15,8 @@ class CreateServicePrimesTable extends Migration
     {
         Schema::create('service_primes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('icone_id');
-            $table->foreign('icone_id')->references('id')->on('icone_primes');
+            $table->unsignedBigInteger('icone_id')->nullable();
+            $table->foreign('icone_id')->references('id')->on('icone_primes')->onDelete('set null');
             $table->string('titre');
             $table->longText('text');
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Icone;
+use App\Models\IconePrime;
 use Illuminate\Http\Request;
 
 class IconeController extends Controller
@@ -14,7 +15,9 @@ class IconeController extends Controller
      */
     public function index()
     {
-        //
+        $icons = Icone::all();
+        $iconsPrimes = IconePrime::all();
+        return view('backoffice.iconesPage',compact('icons','iconsPrimes'));
     }
 
     /**
@@ -78,8 +81,10 @@ class IconeController extends Controller
      * @param  \App\Models\Icone  $icone
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Icone $icone)
+    public function destroy($id)
     {
-        //
+        $delete = Icone::find($id);
+        $delete->delete();
+        return redirect('/icon');
     }
 }

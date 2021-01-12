@@ -14,7 +14,7 @@ class IconePrimeController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -78,8 +78,10 @@ class IconePrimeController extends Controller
      * @param  \App\Models\IconePrime  $iconePrime
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IconePrime $iconePrime)
+    public function destroy($id)
     {
-        //
+        $delete = IconePrime::find($id);
+        $delete->delete();
+        return redirect('/icon');
     }
 }
