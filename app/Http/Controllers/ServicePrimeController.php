@@ -38,7 +38,12 @@ class ServicePrimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new ServicePrime;
+        $store->titre = $request->titre;
+        $store->text = $request->text;
+        $store->icone_id = $request->icone_id;
+        $store->save();
+        return redirect()->back();
     }
 
     /**
@@ -88,8 +93,10 @@ class ServicePrimeController extends Controller
      * @param  \App\Models\ServicePrime  $servicePrime
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServicePrime $servicePrime)
+    public function destroy($id)
     {
-        //
+        $delete = ServicePrime::find($id);
+        $delete->delete();
+        return redirect('/service');
     }
 }

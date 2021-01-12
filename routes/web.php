@@ -10,6 +10,7 @@ use App\Http\Controllers\FooterController;
 use App\Http\Controllers\IconeController;
 use App\Http\Controllers\IconePrimeController;
 use App\Http\Controllers\LogoController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\ReadyController;
 use App\Http\Controllers\ServiceController;
@@ -136,6 +137,7 @@ Route::resource('tag', TagController::class);
 Route::get('search', [ArticleController::class,'search']);
 Route::resource('article', ArticleController::class);
 Route::resource('comment', CommentController::class);
+Route::resource('maps', MapController::class);
 
 Auth::routes();
 

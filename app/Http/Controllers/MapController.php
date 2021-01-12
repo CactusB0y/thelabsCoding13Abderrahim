@@ -14,7 +14,8 @@ class MapController extends Controller
      */
     public function index()
     {
-        //
+        $map = Map::first();
+        return view('backoffice.mapPage',compact('map'));
     }
 
     /**
@@ -67,9 +68,12 @@ class MapController extends Controller
      * @param  \App\Models\Map  $map
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Map $map)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Map::find($id);
+        $update->adress = $request->adress;
+        $update->save();
+        return redirect('/maps');
     }
 
     /**
