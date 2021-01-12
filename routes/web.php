@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CarousselController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\IconeController;
@@ -10,11 +12,14 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\ReadyController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePrimeController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TitreController;
 use App\Models\About;
+use App\Models\Article;
 use App\Models\Caroussel;
+use App\Models\Categorie;
 use App\Models\Choice;
 use App\Models\Contact;
 use App\Models\Footer;
@@ -24,6 +29,7 @@ use App\Models\Map;
 use App\Models\Ready;
 use App\Models\Service;
 use App\Models\ServicePrime;
+use App\Models\Tag;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Titre;
@@ -88,7 +94,10 @@ Route::get('/blog', function () {
     $navbars = Navbar::all();
     $logos = Logo::all();
     $footer = Footer::first();
-    return view('blog',compact('navbars','logos','footer'));
+    $categories = Categorie::all();
+    $tags = Tag::all();
+    $articles = Article::all()->sortDesc();
+    return view('blog',compact('navbars','logos','footer','categories','tags','articles'));
 });
 
 Route::get('/contactpage', function () {
@@ -118,6 +127,9 @@ Route::resource('footer', FooterController::class);
 Route::resource('icon', IconeController::class);
 Route::resource('service', ServiceController::class);
 Route::resource('serviceprime', ServicePrimeController::class);
+Route::resource('categorie', CategorieController::class);
+Route::resource('tag', TagController::class);
+Route::resource('article', ArticleController::class);
 
 Auth::routes();
 
