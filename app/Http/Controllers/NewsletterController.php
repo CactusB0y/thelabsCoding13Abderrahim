@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailContact;
 use App\Mail\Newsletter;
+use App\Models\Mail as ModelsMail;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -41,6 +43,17 @@ class NewsletterController extends Controller
         $news->email = $request->email;
         Mail::to($news->email)->send(new Newsletter($request));
         $news->save();
+        return redirect()->back();
+    }
+
+    public function mailsend(Request $request)
+    {
+        $mail = new Mail;
+        $mail->name = $request->name;
+        $mail->email = $request->email;
+        $mail->subject = $request->subject;
+        $mail->message = $request->message;
+        Mail::to($request->email)->send(new MailContact($request));
         return redirect()->back();
     }
 

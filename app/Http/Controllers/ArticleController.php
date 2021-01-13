@@ -7,7 +7,10 @@ use App\Models\Categorie;
 use App\Models\Footer;
 use App\Models\Logo;
 use App\Models\Navbar;
+use App\Models\News;
 use App\Models\Tag;
+use App\Models\User;
+use App\Notifications\ArticlePublished;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -35,8 +38,16 @@ class ArticleController extends Controller
     public function validation($id)
     {
         $validation = Article::find($id);
+        $newsletter = News::all();
+        $users = User::all();
         $validation->confirmed = true;
         $validation->save();
+        foreach ($newsletter as $e) {
+            $e->notify(new ArticlePublished($validation));
+        }
+        foreach ($users as $e) {
+            $e->notify(new ArticlePublished($validation));
+        }
         return redirect('/attente');
     }
 

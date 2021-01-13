@@ -143,6 +143,7 @@ Route::post('/validation/{id}', [ArticleController::class,'validation']);
 Route::resource('article', ArticleController::class);
 Route::resource('comment', CommentController::class);
 Route::resource('maps', MapController::class);
+Route::post('mailsend', [NewsletterController::class,'mailsend']);
 Route::resource('newsletter', NewsletterController::class);
 
 Auth::routes();
