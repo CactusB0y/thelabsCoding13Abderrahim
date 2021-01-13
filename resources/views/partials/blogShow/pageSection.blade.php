@@ -54,31 +54,26 @@
                                         </div>
                                     </li>
                                 @endforeach
-								{{-- <li>
-									<div class="avatar">
-										<img src="img/avatar/02.jpg" alt="">
-									</div>
-									<div class="commetn-text">
-										<h3>Michael Smith | 03 nov, 2017 | Reply</h3>
-										<p>Vivamus in urna eu enim porttitor consequat. Proin vitae pulvinar libero. Proin ut hendrerit metus. Aliquam erat volutpat. Donec fermen tum convallis ante eget tristique. </p>
-									</div>
-								</li> --}}
 							</ul>
 						</div>
 						<!-- Commert Form -->
 						<div class="row">
 							<div class="col-md-9 comment-from">
 								<h2>Leave a comment</h2>
-								<form class="form-class" role="form" action="/comment" method="POST">
-									@csrf
-									<input name="article_id" value="{{$show->id}}" style="display: none" type="text">
-									<div class="row">
-										<div class="col-sm-12">
-											<textarea name="message" placeholder="Message"></textarea>
-											<button type="submit" class="site-btn">send</button>
+								@if (Auth::check())
+									<form class="form-class" role="form" action="/comment" method="POST">
+										@csrf
+										<input name="article_id" value="{{$show->id}}" style="display: none" type="text">
+										<div class="row">
+											<div class="col-sm-12">
+												<textarea name="message" placeholder="Message"></textarea>
+												<button type="submit" class="site-btn">send</button>
+											</div>
 										</div>
-									</div>
-								</form>
+									</form>
+								@else
+									<h4>Pour pouvoir poster un commentaire veuillez vous connectez <a href="{{ route('login') }}">en cliquant sur ce lien</a></h4>
+								@endif
 							</div>
 						</div>
 					</div>

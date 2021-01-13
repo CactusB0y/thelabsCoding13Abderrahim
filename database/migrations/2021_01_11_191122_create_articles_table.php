@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('src');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
     }

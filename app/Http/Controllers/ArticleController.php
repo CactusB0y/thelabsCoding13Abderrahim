@@ -9,6 +9,9 @@ use App\Models\Logo;
 use App\Models\Navbar;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 class ArticleController extends Controller
 {
@@ -19,7 +22,22 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        return view('backoffice.articlePage',compact('articles'));
+    }
+
+    public function attente()
+    {
+        $articles = Article::all();
+        return view('backoffice.articleValidation',compact('articles'));
+    }
+
+    public function validation($id)
+    {
+        $validation = Article::find($id);
+        $validation->confirmed = true;
+        $validation->save();
+        return redirect('/attente');
     }
 
     /**
@@ -29,13 +47,14 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $tags = Tag::all();
+        $categories = Categorie::all();
+        return view('backoffice.articleAdd',compact('tags','categories'));
     }
 
     public function search()
     {
         $search_text = $_GET['query'];
-
         $articles = Article::where('titre','LIKE','%'. $search_text .'%')->get();
         $categories = Categorie::all();
         $tags = Tag::all();
@@ -43,7 +62,6 @@ class ArticleController extends Controller
         $logos = Logo::all();
         $navbars = Navbar::all();
         return view('searchpage', compact('articles','tags','categories','footer','logos','navbars'));
-
     }
 
     /**
@@ -54,7 +72,16 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Article;
+        $store->titre = $request->titre;
+        $store->texte = $request->texte;
+        $store->user_id = Auth::user()->id;
+        $store->src = $request->file('src')->hashName();
+        $store->save();
+        Image::make($request->file('src'))->resize(755,270)->save('img/blog/'.$store->src);
+        $store->tags()->attach($request->tab);
+        $store->categories()->sync($request->tab2);
+        return redirect('/article');
     }
 
     /**
@@ -78,9 +105,12 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //
+        $edit = Article::find($id);
+        $tags = Tag::all();
+        $categories = Categorie::all();
+        return view('backoffice.articleEdit',compact('edit','tags','categories'));
     }
 
     /**
@@ -90,9 +120,18 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Article::find($id);
+        $update->titre = $request->titre;
+        $update->texte = $request->texte;
+        $update->save();
+        foreach ($update->tags() as $tag) {
+            $tag->detach($tag->id);
+        }
+        $update->tags()->attach($request->tab);
+        $update->categories()->sync($request->tab2);
+        return redirect('/article');
     }
 
     /**
@@ -101,8 +140,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $delete = Article::find($id);
+        $delete->delete();
+        return redirect('/article');
     }
 }

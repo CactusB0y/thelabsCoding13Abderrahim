@@ -354,6 +354,39 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'Article',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/article',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Création Article',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/article/create',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Articles en attente',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/attente',
+                ],
+            ],
+        ],
     ],
 
     /*

@@ -100,7 +100,7 @@ Route::get('/blog', function () {
     $footer = Footer::first();
     $categories = Categorie::all();
     $tags = Tag::all();
-    $articles = Article::paginate(3);
+    $articles = Article::where('confirmed',true)->paginate(3);
     return view('blog',compact('navbars','logos','footer','categories','tags','articles'));
 });
 
@@ -135,6 +135,8 @@ Route::resource('serviceprime', ServicePrimeController::class);
 Route::resource('categorie', CategorieController::class);
 Route::resource('tag', TagController::class);
 Route::get('search', [ArticleController::class,'search']);
+Route::get('/attente', [ArticleController::class,'attente']);
+Route::post('/validation/{id}', [ArticleController::class,'validation']);
 Route::resource('article', ArticleController::class);
 Route::resource('comment', CommentController::class);
 Route::resource('maps', MapController::class);

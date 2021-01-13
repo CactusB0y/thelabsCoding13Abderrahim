@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-md-8 col-sm-7 blog-posts">
 					@foreach ($articles as $article)
-						<!-- Post item -->
+						@if ($article->confirmed == true)
 						<div class="post-item">
 							<div class="post-thumbnail">
 								<img src="{{asset('img/blog/'.$article->src)}}" alt="">
@@ -33,6 +33,7 @@
 								<a href="/article/{{$article->id}}" class="read-more">Read More</a>
 							</div>
 						</div>
+						@endif
 					@endforeach
 					<!-- Pagination -->
 					{{$articles->fragment('articles')->links('vendor.pagination.bootstrap-4')}}
