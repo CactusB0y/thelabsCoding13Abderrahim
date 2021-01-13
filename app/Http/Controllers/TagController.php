@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        $categories = Categorie::all();
+        return view('backoffice.tagPage',compact('tags','categories'));
     }
 
     /**
@@ -35,7 +38,10 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Tag;
+        $store->tag = $request->tag;
+        $store->save();
+        return redirect('/tag');
     }
 
     /**
@@ -55,9 +61,10 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
-        //
+        $edit = Tag::find($id);
+        return view('backoffice.tagEdit',compact('edit'));
     }
 
     /**
@@ -67,9 +74,12 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Tag::find($id);
+        $update->tag = $request->tag;
+        $update->save();
+        return redirect('/tag');
     }
 
     /**
@@ -78,8 +88,10 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        //
+        $delete = Tag::find($id);
+        $delete->delete();
+        return redirect('/tag');
     }
 }

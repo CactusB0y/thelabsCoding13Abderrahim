@@ -35,7 +35,10 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Categorie;
+        $store->categorie = $request->categorie;
+        $store->save();
+        return redirect('/tag');
     }
 
     /**
@@ -55,9 +58,10 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit($id)
     {
-        //
+        $edit = Categorie::find($id);
+        return view('backoffice.categorieEdit',compact('edit'));
     }
 
     /**
@@ -67,9 +71,12 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Categorie::find($id);
+        $update->categorie = $request->categorie;
+        $update->save();
+        return redirect('/tag');
     }
 
     /**
@@ -78,8 +85,10 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy($id)
     {
-        //
+        $delete = Categorie::find($id);
+        $delete->delete();
+        return redirect('/tag');
     }
 }
