@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             NavbarSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
             LogoSeeder::class,
             CarousselSeeder::class,
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             CommentSeeder::class,
             Article_TagSeeder::class,
-            Article_CategorieSeeder::class
+            Article_CategorieSeeder::class,
         ]);
     }
 }
