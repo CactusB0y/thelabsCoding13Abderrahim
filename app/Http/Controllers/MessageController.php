@@ -16,7 +16,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::all()->sortDesc();
+        return view('backoffice.mailbox',compact('messages'));
     }
 
     /**
@@ -58,9 +59,10 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        //
+        $show = Message::find($id);
+        return view('backoffice.mailboxShow',compact('show'));
     }
 
     /**
@@ -92,8 +94,10 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy($id)
     {
-        //
+        $delete = Message::find($id);
+        $delete->delete();
+        return redirect('/message');
     }
 }

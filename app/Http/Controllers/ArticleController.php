@@ -50,7 +50,7 @@ class ArticleController extends Controller
         }
         return redirect('/attente');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -137,9 +137,16 @@ class ArticleController extends Controller
         $update->titre = $request->titre;
         $update->texte = $request->texte;
         $update->save();
-        foreach ($update->tags() as $tag) {
-            $tag->detach($tag->id);
+        $tab = [];
+        foreach ($update->tags as $tag) {
+            array_push($tab, $tag->id);
         }
+        $update->tags()->detach($tab);
+        $tab2 = [];
+        foreach ($update->categories as $cate) {
+            array_push($tab2, $cate->id);
+        }
+        $update->categories()->detach($tab2);
         $update->tags()->attach($request->tab);
         $update->categories()->sync($request->tab2);
         return redirect('/article');

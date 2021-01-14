@@ -24,7 +24,6 @@
 											@else
 												{{$tag->tag}},
 											@endif
-											
 										@endforeach
 									</a>
 									<a href="">{{count($article->comments)}} Comments</a>

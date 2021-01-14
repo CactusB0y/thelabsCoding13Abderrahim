@@ -265,6 +265,29 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        ['header' => 'Mailbox & newsletter'],
+        [
+            'text'    => 'Mailbox',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/message',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Abonné',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/newsletter',
+                ],
+            ],
+        ],
         ['header' => 'website_settings'],
         [
             'text'    => 'Navbar, Caroussel & Logo',
