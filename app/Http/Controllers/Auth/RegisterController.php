@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -51,6 +52,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,8 +67,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $mail = News::all();
+        $index = 0;
+
+        foreach($mail as $element){
+            if($element->email == $data['email']){
+               $index = $element->id; 
+            break;
+            }else{
+                $index = -1;
+            }
+        }
+
+        if($index === -1){
+                $newEntry = new News;
+                $newEntry->email = $data['email'];
+                $newEntry->save();
+        }
+
         return User::create([
             'name' => $data['name'],
+            'prenom' => $data['prenom'],
+            'role_id' => 1,
+            'description' => $data['description'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
