@@ -18,7 +18,8 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        //
+        $newsletters = News::all();
+        return view('backoffice.newsletterPage',compact('newsletters'));
     }
 
     /**
@@ -90,6 +91,8 @@ class NewsletterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = News::find($id);
+        $delete->delete();
+        return redirect('/newsletter');
     }
 }
