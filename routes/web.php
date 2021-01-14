@@ -11,6 +11,7 @@ use App\Http\Controllers\IconeController;
 use App\Http\Controllers\IconePrimeController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ReadyController;
@@ -143,8 +144,8 @@ Route::post('/validation/{id}', [ArticleController::class,'validation']);
 Route::resource('article', ArticleController::class);
 Route::resource('comment', CommentController::class);
 Route::resource('maps', MapController::class);
-Route::post('mailsend', [NewsletterController::class,'mailsend']);
 Route::resource('newsletter', NewsletterController::class);
+Route::resource('message', MessageController::class);
 
 Auth::routes();
 
@@ -156,4 +157,4 @@ Auth::routes();
 
 Route::get('/home', function() {
     return view('home');
-})->name('home')->middleware('auth');
+})->name('home')->middleware('Connexion');

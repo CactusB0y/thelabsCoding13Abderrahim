@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\MailContact;
-use App\Mail\Newsletter;
-use App\Models\Mail as ModelsMail;
-use App\Models\News;
+use App\Models\Message;
+use App\Models\User;
+use App\Notifications\MessagePublished;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
-class NewsletterController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,22 +37,28 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        $news = new News;
-        $news->email = $request->email;
-        Mail::to($news->email)->send(new Newsletter($request));
-        $news->save();
+        $store = new Message;
+        $to = User::all();
+        $store->name = $request->name;
+        $store->email = $request->email;
+        $store->subject = $request->subject;
+        $store->message = $request->message;
+        $store->save();
+        foreach ($to as $e) {
+            if($e->role_id == 4){
+                $e->notify(new MessagePublished($store));
+            }
+        }
         return redirect()->back();
     }
-
-
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Message $message)
     {
         //
     }
@@ -62,10 +66,10 @@ class NewsletterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Message $message)
     {
         //
     }
@@ -74,10 +78,10 @@ class NewsletterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Message $message)
     {
         //
     }
@@ -85,10 +89,10 @@ class NewsletterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Message $message)
     {
         //
     }

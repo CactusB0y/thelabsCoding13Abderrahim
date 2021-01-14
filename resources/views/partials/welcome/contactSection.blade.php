@@ -15,7 +15,7 @@
 				</div>
 				<!-- contact form -->
 				<div id="contact" class="col-md-6 col-pull">
-					<form class="form-class" id="con_form" role="form" action="/mailsend" method="POST">
+					<form class="form-class" id="con_form" role="form" action="/message" method="POST">
 						@csrf
 						<div class="row">
 							<div class="col-sm-6">

@@ -56,9 +56,11 @@
 				<li><a href="/blog">Blog</a></li>
                 <li><a href="/contact">Contact</a></li> --}}
                 @if (Route::has('login'))
-                    @auth
-					   <li><a href="{{ url('/home') }}">Home</a></li>
-					   <li><a href="{{ url('/logout') }}" class="btn btn-light">Logout</a></li> 
+					@auth
+						@if (Auth::user()->role_id != 1)
+							<li><a href="{{ url('/home') }}">Backoffice</a></li>
+						@endif
+					   <li><a href="{{ url('/logout') }}" class="btn btn-light">Logout</a></li>
                     @else
                         <li><a href="{{ route('login') }}">Login</a></li>
 
