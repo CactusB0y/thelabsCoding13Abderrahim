@@ -46,7 +46,7 @@
                                 @foreach ($show->comments as $comment)
                                     <li>
                                         <div class="avatar">
-                                            <img src={{asset("img/avatar/".$comment->users->src)}} alt="">
+                                            <img  src={{asset("img/avatar/".$comment->users->src)}} alt="">
                                         </div>
                                         <div class="commetn-text">
                                             <h3>{{$comment->users->prenom}} {{$comment->users->name}} | {{$comment->created_at->format('d')}} {{$comment->created_at->format('M')}}, {{$comment->created_at->format('Y')}} | Reply</h3>

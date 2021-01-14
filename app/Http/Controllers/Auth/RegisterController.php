@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 class RegisterController extends Controller
 {
@@ -53,6 +55,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
+            'src' => ['required'],
             'description' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -84,10 +87,12 @@ class RegisterController extends Controller
                 $newEntry->email = $data['email'];
                 $newEntry->save();
         }
-
+        
         return User::create([
             'name' => $data['name'],
             'prenom' => $data['prenom'],
+            'src' => $data['src']->hashName(),
+            $data["src"]->storePublicly('img/avatar/','public'),
             'role_id' => 1,
             'description' => $data['description'],
             'email' => $data['email'],
