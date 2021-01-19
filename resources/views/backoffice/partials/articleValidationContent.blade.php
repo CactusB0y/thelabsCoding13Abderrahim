@@ -33,17 +33,21 @@
                             @endforeach
                         </td>
                         <td>
+                            @can('adminWebmaster')
                             <form action="/validation/{{$article->id}}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary" ><i class="fas fa-check"></i></button>
                             </form>
+                            @endcan
                         </td>
                         <td>
+                            @can('adminWebmaster')
                             <form action="/article/{{$article->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit"><i class="fas fa-times"></i></button>
                             </form>
+                            @endcan
                         </td>
                     </tr>  
                 @endif

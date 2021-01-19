@@ -37,6 +37,7 @@ class ArticleController extends Controller
 
     public function validation($id)
     {
+        $this->authorize('adminWebmaster');
         $validation = Article::find($id);
         $newsletter = News::all();
         $users = User::all();
