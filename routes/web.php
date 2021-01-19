@@ -120,7 +120,8 @@ Route::get('/contactpage', function () {
 
 Route::get('/membre', function() {
     $users = User::all();
-    return view('backoffice.user',compact('users'));
+    $team = Team::all();
+    return view('backoffice.user',compact('users','team'));
 });
 
 Route::resource('navbar', NavbarController::class)->middleware('Connexion2');

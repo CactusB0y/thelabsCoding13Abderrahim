@@ -23,10 +23,14 @@
                     <td>{{$user->description}}</td>
                     <td>{{$user->email}}</td>
                     <td>
-                        <form action="/teamcreate/{{$user->id}}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-primary" ><i class="fas fa-check"></i></button>
-                        </form>
+                        @if ($team->contains('nom', $user->name))
+                            <p>present dans la team</p>
+                        @else
+                            <form action="/teamcreate/{{$user->id}}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary" ><i class="fas fa-check"></i></button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
