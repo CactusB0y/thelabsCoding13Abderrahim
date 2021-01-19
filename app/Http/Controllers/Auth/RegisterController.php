@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserHasRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Providers\RouteServiceProvider;
@@ -89,16 +90,18 @@ class RegisterController extends Controller
                 $newEntry->save();
         }
         
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'prenom' => $data['prenom'],
             'src' => $data['src']->hashName(),
             $data["src"]->storePublicly('img/avatar/','public'),
-            'role_id' => 1,
             'description' => $data['description'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            // $newEntry->notify(new ArticlePublished()),
         ]);
+
+        event(new UserHasRegisteredEvent($user));
+
+        return $user;
     }
 }

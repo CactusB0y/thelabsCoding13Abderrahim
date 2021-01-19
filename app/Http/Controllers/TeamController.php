@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Choice;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -119,6 +120,19 @@ class TeamController extends Controller
         $main->team_id = $request->team_id;
         $main->save();
         return redirect('/titre');
+    }
+
+    public function teamcreate($id)
+    {
+        $teamcreate = User::find($id);
+        $teamnew = new Team;
+        $teamnew->nom = $teamcreate->name;
+        $teamnew->prenom = $teamcreate->prenom;
+        $teamnew->role = $teamcreate->roles->role;
+        $teamnew->src = $teamcreate->src;
+        $teamnew->src_avatar = $teamcreate->src;
+        $teamnew->save();
+        return redirect('/membre');
     }
 
     /**

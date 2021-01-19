@@ -293,6 +293,18 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'membre',
+            'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
+            'submenu' => [
+                [
+                    'text' => 'voir',
+                    'icon'    => 'fas fa-eye',
+                    'url'  => '/membre',
+                ],
+            ],
+        ],
         ['header' => 'website_settings'],
         [
             'text'    => 'Navbar, Caroussel & Logo',

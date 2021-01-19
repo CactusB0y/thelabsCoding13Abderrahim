@@ -40,6 +40,7 @@ use App\Models\Tag;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\Titre;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -117,6 +118,11 @@ Route::get('/contactpage', function () {
     return view('contact',compact('navbars','logos','contact','footer','map'));
 });
 
+Route::get('/membre', function() {
+    $users = User::all();
+    return view('backoffice.user',compact('users'));
+});
+
 Route::resource('navbar', NavbarController::class)->middleware('Connexion2');
 Route::post('/titlechange/{id}', [LogoController::class, 'titlechange']);
 Route::resource('logo', LogoController::class);
@@ -127,6 +133,7 @@ Route::resource('about', AboutController::class);
 Route::resource('titre', TitreController::class);
 Route::post('/teamProfil/{id}', [TeamController::class,'teamProfil']);
 Route::post('/main/{id}', [TeamController::class, 'main']);
+Route::post('/teamcreate/{id}', [TeamController::class, 'teamcreate']);
 Route::resource('team', TeamController::class);
 Route::resource('testimonial', TestimonialController::class);
 Route::resource('ready', ReadyController::class);
