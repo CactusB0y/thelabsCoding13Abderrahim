@@ -13,6 +13,12 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('Connexion2');
+    }
+
     public function index()
     {
         $tags = Tag::all();

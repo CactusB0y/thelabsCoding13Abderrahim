@@ -251,7 +251,7 @@ return [
         ],
         [
             'text'        => 'Contact',
-            'url'         => '/contact',
+            'url'         => '/contactpage',
             'icon'        => 'far fa-address-book'
         ],
         ['header' => 'account_settings'],
@@ -265,10 +265,14 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        ['header' => 'Mailbox & newsletter'],
+        [
+            'header' => 'Mailbox & newsletter',
+            'can' => 'adminWebmaster'
+        ],
         [
             'text'    => 'Mailbox',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -280,6 +284,7 @@ return [
         [
             'text'    => 'Abonné',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -292,6 +297,7 @@ return [
         [
             'text'    => 'Navbar, Caroussel & Logo',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -303,6 +309,7 @@ return [
         [
             'text'    => 'Abouts & Video',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -314,6 +321,7 @@ return [
         [
             'text'    => 'Titre, Teams & Testimonials',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -325,6 +333,7 @@ return [
         [
             'text'    => 'Ready, Contact Us, Footer',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -336,6 +345,7 @@ return [
         [
             'text'    => 'Service',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -358,6 +368,7 @@ return [
         [
             'text'    => 'Maps',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',
@@ -369,6 +380,7 @@ return [
         [
             'text'    => 'Tag & Catégorie',
             'icon'    => 'fas fa-fw fa-share',
+            'can' => 'adminWebmaster',
             'submenu' => [
                 [
                     'text' => 'voir',

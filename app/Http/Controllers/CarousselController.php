@@ -38,6 +38,7 @@ class CarousselController extends Controller
     public function store(Request $request)
     {
         $store = new Caroussel;
+        $this->authorize('adminWebmaster');
         $store->src = $request->src;
         $store->src = $request->file('src')->hashName();
         $store->save();
@@ -89,9 +90,11 @@ class CarousselController extends Controller
     {
         $delete = Caroussel::find($id);
         if($delete->src == '01.jpg' || $delete->src == '02.jpg'){
+            $this->authorize('adminWebmaster');
             $delete->delete();
             return redirect('/navbar');
         } else {
+            $this->authorize('adminWebmaster');
             Storage::disk('public')->delete('img/'.$delete->src);
             $delete->delete();
             return redirect('/navbar');

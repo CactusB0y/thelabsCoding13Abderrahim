@@ -15,6 +15,12 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('Connexion2');
+    }
+
     public function index()
     {
         $services = Service::paginate(5);

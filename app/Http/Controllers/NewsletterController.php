@@ -16,6 +16,12 @@ class NewsletterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('Connexion2');
+    }
+
     public function index()
     {
         $newsletters = News::all();

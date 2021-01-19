@@ -72,7 +72,7 @@ class LogoController extends Controller
     public function update(Request $request, $id)
     {
         $update = Logo::find($id);
-        
+        $this->authorize('adminWebmaster');
         if($update->src == "big-logo.png" && $update->src_intervention == 'logo.png'){
             $update->src = 'newbig-logo.png';
             $update->src_intervention = 'newlogo.png';

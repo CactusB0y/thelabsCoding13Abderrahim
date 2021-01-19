@@ -32,13 +32,19 @@
                                 <p>{{$cat->categorie}}</p>
                             @endforeach
                         </td>
-                        <td><a class="btn btn-primary" href="/article/{{$article->id}}/edit"><i class="fas fa-pen">edit</i></a></td>
                         <td>
-                            <form action="/article/{{$article->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash">delete</i></button>
-                            </form>
+                            @can('adminWebmaster')
+                                <a class="btn btn-primary" href="/article/{{$article->id}}/edit"><i class="fas fa-pen">edit</i></a>
+                            @endcan
+                        </td>
+                        <td>
+                            @can('adminWebmaster')
+                                <form action="/article/{{$article->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash">delete</i></button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>  
                 @endif

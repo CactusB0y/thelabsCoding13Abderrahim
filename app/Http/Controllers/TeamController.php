@@ -39,6 +39,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $store = new Team;
+        $this->authorize('adminWebmaster');
         $store->nom = $request->nom;
         $store->prenom = $request->prenom;
         $store->role = $request->role;
@@ -70,6 +71,7 @@ class TeamController extends Controller
     public function edit($id)
     {
         $edit = Team::find($id);
+        $this->authorize('adminWebmaster');
         return view('backoffice.teamEdit',compact('edit'));
     }
 
@@ -113,6 +115,7 @@ class TeamController extends Controller
     public function main(Request $request, $id)
     {
         $main = Choice::find($id);
+        $this->authorize('adminWebmaster');
         $main->team_id = $request->team_id;
         $main->save();
         return redirect('/titre');
@@ -127,6 +130,7 @@ class TeamController extends Controller
     public function destroy($id)
     {
         $delete = Team::find($id);
+        $this->authorize('adminWebmaster');
         if ($delete->src == '2.jpg' || $delete->src == '3.jpg' || $delete->src == '1.jpg'){
             $delete->delete();
         } else {

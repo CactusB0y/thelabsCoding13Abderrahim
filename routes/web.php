@@ -117,7 +117,7 @@ Route::get('/contactpage', function () {
     return view('contact',compact('navbars','logos','contact','footer','map'));
 });
 
-Route::resource('navbar', NavbarController::class);
+Route::resource('navbar', NavbarController::class)->middleware('Connexion2');
 Route::post('/titlechange/{id}', [LogoController::class, 'titlechange']);
 Route::resource('logo', LogoController::class);
 Route::resource('caroussel', CarousselController::class);

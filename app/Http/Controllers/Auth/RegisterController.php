@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Notifications\ArticlePublished;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -97,6 +98,7 @@ class RegisterController extends Controller
             'description' => $data['description'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            // $newEntry->notify(new ArticlePublished()),
         ]);
     }
 }

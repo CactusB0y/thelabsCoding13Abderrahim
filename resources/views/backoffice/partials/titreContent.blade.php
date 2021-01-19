@@ -20,7 +20,9 @@
                             <th scope="row">{{$titre->id}}</th>
                             <td>{{$titre->titre}}</td>
                             <td>
-                                <a class="btn btn-primary" href="/titre/{{$titre->id}}/edit"><i class="fas fa-edit">edit</i></a>
+                                @can('adminWebmaster')
+                                    <a class="btn btn-primary" href="/titre/{{$titre->id}}/edit"><i class="fas fa-edit">edit</i></a>  
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -39,7 +41,11 @@
                     <th scope="col">src</th>
                     <th scope="col">Avatar</th>
                     <th scope="col"> </th>
-                    <th scope="col"><a class="btn btn-success" href="/team/create">Ajouter un membre</a></th>
+                    <th scope="col">
+                        @can('adminWebmaster')
+                            <a class="btn btn-success" href="/team/create">Ajouter un membre</a>
+                        @endcan
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,14 +57,18 @@
                             <td><img height="50px" src="{{asset('img/team/'.$team->src)}}" alt=""></td>
                             <td><img height="50px" src="{{asset('img/avatar/'.$team->src_avatar)}}" alt=""></td>
                             <td>
-                                <a class="btn btn-primary" href="/team/{{$team->id}}/edit"><i class="fas fa-edit">edit</i></a>
+                                @can('adminWebmaster')
+                                    <a class="btn btn-primary" href="/team/{{$team->id}}/edit"><i class="fas fa-edit">edit</i></a>   
+                                @endcan
                             </td>
                             <td>
-                                <form role="form" action="/team/{{$team->id}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash"> delete</i></button>
-                                </form>
+                                @can('adminWebmaster')
+                                    <form role="form" action="/team/{{$team->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash"> delete</i></button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -89,7 +99,9 @@
                       </div>
                   </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @can('adminWebmaster')
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    @endcan
                   </div>
                 </form>
               </div>
@@ -97,7 +109,9 @@
     </div>
     <div class="container mt-5">
         <div class="row">
-            <a class="btn btn-success mb-3" href="/testimonial/create">Ajouter un testimonial</a>
+            @can('adminWebmaster')
+                <a class="btn btn-success mb-3" href="/testimonial/create">Ajouter un testimonial</a>
+            @endcan
             <table class="table">
                 <thead>
                   <tr>
@@ -115,14 +129,18 @@
                             <td>{{$testimonial->testimonial}}</td>
                             <td>{{$testimonial->teams->nom}} {{$testimonial->teams->prenom}}</td>
                             <td>
-                                <a class="btn btn-primary" href="/testimonial/{{$testimonial->id}}/edit"><i class="fas fa-edit">edit</i></a>
+                                @can('adminWebmaster')
+                                    <a class="btn btn-primary" href="/testimonial/{{$testimonial->id}}/edit"><i class="fas fa-edit">edit</i></a>
+                                @endcan
                             </td>
                             <td>
-                                <form role="form" action="/testimonial/{{$testimonial->id}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash">delete</i></button>
-                                </form>
+                                @can('adminWebmaster')
+                                    <form role="form" action="/testimonial/{{$testimonial->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash">delete</i></button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

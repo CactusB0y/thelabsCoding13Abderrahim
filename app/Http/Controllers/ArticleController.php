@@ -119,6 +119,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $edit = Article::find($id);
+        $this->authorize('adminWebmaster');
         $tags = Tag::all();
         $categories = Categorie::all();
         return view('backoffice.articleEdit',compact('edit','tags','categories'));
@@ -161,6 +162,17 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $delete = Article::find($id);
+        $tab = [];
+        $tab2 = [];
+        $this->authorize('adminWebmaster');
+        foreach ($delete->tags as $tags) {
+            array_push($tab,$tags);
+        }
+        $delete->tags()->detach($tab);
+        foreach ($delete->categories as $cate) {
+            array_push($tab2,$cate);
+        }
+        $delete->tags()->detach($tab2);
         $delete->delete();
         return redirect('/article');
     }

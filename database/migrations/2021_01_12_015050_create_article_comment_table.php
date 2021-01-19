@@ -16,7 +16,9 @@ class CreateArticleCommentTable extends Migration
         Schema::create('article_comment', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
+            $table->foreign('article_id')->references('id')->on('articles');
             $table->unsignedBigInteger('comment_id');
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }

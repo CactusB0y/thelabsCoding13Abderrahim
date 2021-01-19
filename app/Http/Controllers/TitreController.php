@@ -19,6 +19,12 @@ class TitreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('Connexion2');
+    }
+
     public function index()
     {
         $titres = Titre::all();
@@ -69,6 +75,7 @@ class TitreController extends Controller
     public function edit($id)
     {
         $edit = Titre::find($id);
+        $this->authorize('adminWebmaster');
         return view('backoffice.titreEdit',compact('edit'));
     }
 

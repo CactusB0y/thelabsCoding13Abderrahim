@@ -7,6 +7,7 @@ use App\Models\Caroussel;
 use App\Models\Logo;
 use App\Models\Navbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NavbarController extends Controller
 {
@@ -15,13 +16,20 @@ class NavbarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('Connexion2');
+    }
+
     public function index()
     {
         $navbars = Navbar::all();
         $logo = Logo::first();
         $caroussels = Caroussel::all();
         $abouts = About::first();
-        return view('backoffice.homePage',compact('navbars','logo','caroussels','abouts'));
+        $user = Auth::user()->id;
+        return view('backoffice.homePage',compact('navbars','logo','caroussels','abouts','user'));
     }
 
     /**
@@ -65,6 +73,7 @@ class NavbarController extends Controller
     public function edit($id)
     {
         $edit = Navbar::find($id);
+        $this->authorize('adminWebmaster');
         return view('backoffice.buttonEdit',compact('edit'));
     }
 

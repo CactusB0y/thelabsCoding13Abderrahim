@@ -27,7 +27,9 @@
                           <td>{{$navbar->button}}</td>
                           <td>{{$navbar->url}}</td>
                           <td>
-                              <a class="btn btn-primary" href="navbar/{{$navbar->id}}/edit"><i class="fas fa-edit">edit</i></a>
+                            @can('adminWebmaster')
+                              <a class="btn btn-primary" href="navbar/{{$navbar->id}}/edit"><i class="fas fa-edit">edit</i></a> 
+                            @endcan
                           </td>
                       </tr>
                   @endforeach
@@ -51,7 +53,9 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">submit</button>
+                @can('adminWebmaster')
+                  <button class="btn btn-primary" type="submit">submit</button>
+                @endcan
               </form>
             </div>
             <table class="table">
@@ -69,11 +73,13 @@
                     <td><img height="50px" src="{{asset('img/'.$caroussel->src)}}" alt=""></td>
                     <td>
                       <div class="row">
+                        @can('adminWebmaster')
                           <form role="form" action="/caroussel/{{$caroussel->id}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit"><i class="fas fa-trash">delete</i></button>
                           </form>
+                        @endcan
                       </div>
                     </td>
                   </tr>  
@@ -109,7 +115,9 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @can('adminWebmaster')
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    @endcan
                   </div>
                 </form>
               </div>
